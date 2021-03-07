@@ -156,7 +156,7 @@ class MainWindow(QMainWindow):
                 currentPortName = self.serialPortComboBox.currentText()
                 write_timeout = 4 if DISABLE_MODEL_TRASFER else 240
                 self.port = serial.Serial(currentPortName, 115200 , timeout=1, write_timeout=write_timeout, bytesize=8, parity='N', stopbits=1)
-                #self.port.set_buffer_size(rx_size = 10**3, tx_size = 10**8)
+                self.port.set_buffer_size(rx_size = 10**3, tx_size = 10**8)
                 self.serialPortComboBox.setItemText(self.serialPortComboBox.currentIndex(), currentPortName + " (CONNECTED)")
                 self.connectDisconnectSerialButton.setText("Disconnect")
                 self.b_serialConnected = True
@@ -437,20 +437,18 @@ class MainWindow(QMainWindow):
             self.port.close()
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser = argparse.ArgumentParser(description='RPi HIL Communication GUI')
     parser.add_argument('--ignore-platform', default=False, action='store_true')
     parser.add_argument('--allow-resizing', default=False, action='store_true')
     parser.add_argument('--larger-font', default=False, action='store_true')
     args = parser.parse_args()
 
-    print(args.allow_resizing, args.ignore_platform)
-    #if not sys.platform.startswith('win'):
-        #print("Unsupported Platform. This application is tested on Windows Only")
-        #if args.ignore_platform:
-            #print("The application will continue to run but may crash or not function as intended")
-        
-        #else:
-            #exit(1)
+   # if not sys.platform.startswith('win'):
+    #    print("Unsupported Platform. This application is tested on Windows Only")
+     #   if args.ignore_platform:
+      #      print("The application will continue to run but may crash or not function as intended")
+       # else:
+        #    exit(1)
     
     app = QApplication(sys.argv)
 
