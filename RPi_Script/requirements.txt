@@ -1,4 +1,0 @@
-numpy
-crccheck==1.0
-pyserial==3.5
-scikit_learn
